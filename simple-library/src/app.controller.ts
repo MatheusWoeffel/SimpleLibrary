@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
+import { firstValueFrom } from 'rxjs';
 import { AppService } from './app.service';
 import { CreateBookDto } from './dtos/createBook.dto';
 
@@ -19,8 +20,8 @@ export class AppController {
   @Post("/book/create")
   async createBook(@Body() createBookDto: CreateBookDto): Promise<string>{
     const result = this.client.send<void>({cmd: "createBook"}, { title: createBookDto.title, synopsis: createBookDto.synopsis, genres: createBookDto.genres});
-    await result.toPromise();
+    await firstValueFrom(result, {defaultValue: undefined});
 
-    return "ok";
+    return "Book created Sucessfully";
   }
 }
