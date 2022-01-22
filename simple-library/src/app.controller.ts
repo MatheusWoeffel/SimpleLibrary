@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Inject, Post, Query } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 import { AppService } from './app.service';
+import { BookDto } from './dtos/book.dts';
 import { CreateBookDto } from './dtos/createBook.dto';
 
 @Controller()
@@ -23,5 +24,21 @@ export class AppController {
     await firstValueFrom(result, {defaultValue: undefined});
 
     return "Book created Sucessfully";
+  }
+
+  @Get("book")
+  async getBookById(@Query() id: number) : Promise<BookDto>{
+    const result = this.client.send<BookDto>({cmd: "getBookById"}, id);
+    
+    try{
+      const book = await firstValueFrom(result);
+      return book;
+    }
+    catch{
+      throw new HttpException({
+        status: HttpStatus.NOT_FOUND,
+        error: "There's no book with the given id.",
+      }, HttpStatus.NOT_FOUND);
+    }
   }
 }

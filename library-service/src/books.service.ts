@@ -15,11 +15,11 @@ export class BooksService {
     return this.booksRepository.find();
   }
 
-  findOne(id: string): Promise<Book> {
+  findOne(id: number): Promise<Book> {
     return this.booksRepository.findOne(id);
   }
 
-  async remove(id: string): Promise<void> {
+  async remove(id: number): Promise<void> {
     await this.booksRepository.delete(id);
   }
 
