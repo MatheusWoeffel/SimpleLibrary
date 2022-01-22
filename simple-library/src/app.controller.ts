@@ -51,8 +51,8 @@ export class AppController {
     return books;
   }
 
-  @Delete("/book")
-  async deleteBook(@Query() id): Promise<string> {
+  @Delete("/book/:id")
+  async deleteBook(@Param() id): Promise<string> {
     const result = this.client.send<void>({cmd: "deleteBookById"}, id);
     await firstValueFrom(result, { defaultValue: undefined});
 
