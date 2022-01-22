@@ -17,6 +17,7 @@ To experiment with the microsservices architecture and implementation in NestJS,
 2. cd library-service && yarn run start (to run the microservice)
 3. cd simple-library && yarn run start (to run the simple-library API)
 4. access localhost:5000/api to view the API documentation, powered by swagger
+5. Access postman api collection [Postman Link](https://www.postman.com/matheuswoeffel/workspace/my-workspace/collection/13236172-39ee49ed-d65b-45b3-9980-fb63847cd0d8)
 
 ## Capabilities
 The project consists of a CRUD library managing Books, which are objects with the following properties:
