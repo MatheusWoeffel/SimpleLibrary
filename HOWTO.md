@@ -23,3 +23,9 @@ throw new HttpException({
         error: "There's no book with the given id.",
       }, HttpStatus.NOT_FOUND);
 ```
+
+# 5. Payload vazio ao enviar mensagens
+You can't send null or undefined payloads to microservices, you can, instead, send empty objects.
+```javascript
+const result = this.client.send<BookDto[]>({cmd: "getAllBooks"}, {});
+```

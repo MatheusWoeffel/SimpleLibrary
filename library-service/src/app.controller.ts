@@ -22,4 +22,9 @@ export class LibraryController {
   async getBookById(data: number): Promise<Book> {
     return await this.booksService.findOne(data);
   }
+
+  @MessagePattern({ cmd: 'getAllBooks' })
+  async getAllBooks(): Promise<Book[]> {
+    return await this.booksService.findAll();
+  }
 }

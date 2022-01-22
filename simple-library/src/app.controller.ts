@@ -3,7 +3,7 @@ import { Body, Controller, Get, HttpException, HttpStatus, Inject, Post, Query }
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 import { AppService } from './app.service';
-import { BookDto } from './dtos/book.dts';
+import { BookDto } from './dtos/book.dto';
 import { CreateBookDto } from './dtos/createBook.dto';
 
 @Controller()
@@ -40,5 +40,13 @@ export class AppController {
         error: "There's no book with the given id.",
       }, HttpStatus.NOT_FOUND);
     }
+  }
+
+  @Get("book/all")
+  async getAllBooks() : Promise<BookDto[]>{
+    const result = this.client.send<BookDto[]>({cmd: "getAllBooks"}, {});
+
+    const books = await firstValueFrom(result);
+    return books;
   }
 }
