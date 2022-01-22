@@ -1,9 +1,6 @@
 import { IsArray, IsDefined, IsNotEmpty, IsOptional } from "class-validator";
 /* eslint-disable prettier/prettier */
-export class UpdateBookDto {
-  @IsDefined()
-  id: number;
-
+export class CreateBookDto {
   @IsNotEmpty()
   title: string;
   

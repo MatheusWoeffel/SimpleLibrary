@@ -2,20 +2,15 @@ import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Book } from './books.entity';
 import { BooksService } from './books.service';
+import { CreateBookDto } from './dtos/createBook.dto';
 import { UpdateBookDto } from './dtos/updateBook.dto';
-
-type CreateBookDTO = {
-  title: string;
-  synopsis: string | null;
-  genres: string[];
-};
 
 @Controller()
 export class LibraryController {
   constructor(private readonly booksService: BooksService) {}
 
   @MessagePattern({ cmd: 'createBook' })
-  async createBook(data: CreateBookDTO): Promise<void> {
+  async createBook(data: CreateBookDto): Promise<void> {
     await this.booksService.create(data);
   }
 
