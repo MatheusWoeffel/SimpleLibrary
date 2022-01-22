@@ -9,7 +9,7 @@ export class Book {
   @Column()
   title: string;
 
-  @Column()
+  @Column({nullable: true})
   synopsis: string | null;
 
   @Column("text", { array: true })
