@@ -19,6 +19,11 @@ export class BooksService {
     return this.booksRepository.findOne(id);
   }
 
+  async findByGenre(genre: string) : Promise<Book[]> {
+    const books = await this.booksRepository.find();
+    return books.filter(b => b.genres.includes(genre));
+  }
+
   async remove(id: number): Promise<void> {
     await this.booksRepository.delete(id);
   }

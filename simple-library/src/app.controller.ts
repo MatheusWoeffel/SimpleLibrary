@@ -66,4 +66,12 @@ export class AppController {
 
     return "Book updated sucessfully";
   }
+
+  @Get("/book/query")
+  async queryBooks(@Query('genre') genre) : Promise<BookDto[]>{
+    const result = this.client.send<BookDto[]>({cmd: "getBookByGenre"}, genre);
+
+    const books = await firstValueFrom(result);
+    return books;
+  }
 }

@@ -33,4 +33,9 @@ export class LibraryController {
   async updateBookById(data: UpdateBookDto) {
     return await this.booksService.update(data);
   }
+
+  @MessagePattern({ cmd: 'getBookByGenre' })
+  async getBookByGenre(data: string) {
+    return await this.booksService.findByGenre(data);
+  }
 }
