@@ -27,4 +27,13 @@ export class BooksService {
     const book = this.booksRepository.create( { title, synopsis, genres});
     await this.booksRepository.save(book);
   }
+
+  async update({id, title ,synopsis, genres} : {id: number, title: string, synopsis: string | null, genres: string[]}) : Promise<void>{
+    const book = await this.booksRepository.findOne(id);
+    book.title = title;
+    book.synopsis = synopsis;
+    book.genres = genres;
+
+    await this.booksRepository.save(book);
+  }
 }

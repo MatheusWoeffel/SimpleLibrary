@@ -2,6 +2,7 @@ import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Book } from './books.entity';
 import { BooksService } from './books.service';
+import { UpdateBookDto } from './dtos/updateBook.dto';
 
 type CreateBookDTO = {
   title: string;
@@ -26,5 +27,15 @@ export class LibraryController {
   @MessagePattern({ cmd: 'getAllBooks' })
   async getAllBooks(): Promise<Book[]> {
     return await this.booksService.findAll();
+  }
+
+  @MessagePattern({ cmd: 'deleteBookById' })
+  async deleteBookById(data: number): Promise<void> {
+    return await this.booksService.remove(data);
+  }
+
+  @MessagePattern({ cmd: 'updateBookById' })
+  async updateBookById(data: UpdateBookDto) {
+    return await this.booksService.update(data);
   }
 }
