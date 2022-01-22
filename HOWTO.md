@@ -14,3 +14,12 @@ yarn add pg -> driver do postgres
 
 # 3. Use a service defined in another module that uses a TypeORM repository
 https://stackoverflow.com/questions/64282183/nestjs-cant-inject-a-repository-from-a-different-module
+
+# 4. Return different status code on exceptions
+Try/Catch + HttpExceptions:
+```javascript
+throw new HttpException({
+        status: HttpStatus.NOT_FOUND,
+        error: "There's no book with the given id.",
+      }, HttpStatus.NOT_FOUND);
+```
