@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Inject, Param, Post, Put, Query } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
+import { ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { firstValueFrom } from 'rxjs';
 import { AppService } from './app.service';
 import { BookDto } from './dtos/book.dto';
