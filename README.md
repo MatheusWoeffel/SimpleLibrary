@@ -17,3 +17,25 @@ To experiment with the microsservices architecture and implementation in NestJS,
 2. cd library-service && yarn run start (to run the microservice)
 3. cd simple-library && yarn run start (to run the simple-library API)
 4. access localhost:5000/api to view the API documentation, powered by swagger
+
+## Capabilities
+The project consists of a CRUD library managing Books, which are objects with the following properties:
+```javascript
+class Book {
+  title: string;
+  synopsis: string | null;
+  genres: string[]
+}
+```
+- Create book
+- Retrieve book by id
+- Update book by id
+- Delete book by id
+- Retrieve all books
+- EXTRA: Query for books of a given genre (sci-fi, horror, dystopias)...
+
+## Further Work
+- Explore the disacoplation between the API and microservice to insert another microservice with different databases, which enables us to switch between different databases without changing the API code.
+- Implement a front-end client (possibly using React)
+
+
