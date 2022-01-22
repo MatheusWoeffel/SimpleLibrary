@@ -4,6 +4,7 @@ import { LibraryController } from './app.controller';
 import { AppService } from './app.service';
 import { Book } from './books.entity';
 import { BooksModule } from './books.module';
+import { BooksService } from './books.service';
 
 @Module({
   imports: [
@@ -17,9 +18,10 @@ import { BooksModule } from './books.module';
       entities: [Book],
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([Book]),
     BooksModule,
   ],
   controllers: [LibraryController],
-  providers: [AppService],
+  providers: [AppService, BooksService],
 })
 export class AppModule {}

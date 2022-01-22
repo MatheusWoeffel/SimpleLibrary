@@ -22,4 +22,9 @@ export class BooksService {
   async remove(id: string): Promise<void> {
     await this.booksRepository.delete(id);
   }
+
+  async create({ title ,synopsis, genres} : {title: string, synopsis: string | null, genres: string[]}) : Promise<void>{
+    const book = this.booksRepository.create( { title, synopsis, genres});
+    await this.booksRepository.save(book);
+  }
 }

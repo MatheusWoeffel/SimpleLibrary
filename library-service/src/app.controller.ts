@@ -1,13 +1,19 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
-import { AppService } from './app.service';
+import { BooksService } from './books.service';
+
+type CreateBookDTO = {
+  title: string;
+  synopsis: string | null;
+  genres: string[];
+};
 
 @Controller()
 export class LibraryController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly booksService: BooksService) {}
 
-  @MessagePattern({ cmd: 'sum' })
-  accumulate(data: number[]): number {
-    return (data || []).reduce((a, b) => a + b);
+  @MessagePattern({ cmd: 'createBook' })
+  async createBook(data: CreateBookDTO): Promise<void> {
+    await this.booksService.create(data);
   }
 }
