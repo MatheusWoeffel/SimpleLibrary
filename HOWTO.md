@@ -29,3 +29,6 @@ You can't send null or undefined payloads to microservices, you can, instead, se
 ```javascript
 const result = this.client.send<BookDto[]>({cmd: "getAllBooks"}, {});
 ```
+
+# 6. Application hanging when using Redis transporter
+You must use the same redis package version on both the client and api. Also, the version must be redis@3, as noted in https://docs.nestjs.com/microservices/redis
